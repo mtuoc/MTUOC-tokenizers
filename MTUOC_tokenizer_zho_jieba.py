@@ -61,7 +61,15 @@ class Tokenizer():
         self.specialchars=["«","»","—","‘","’","“","”","„",]
         self.subs=["￭'s","￭'ll","￭'t","￭'cause","￭'d","￭'em","￭'ve","￭'dn","￭'m","￭'n","￭'re","￭'til","￭'tween","￭'all","ol'￭"]
         self.re_num = re.compile(r'[\d\,\.]+')
-        jieba.set_dictionary('dict.txt.big')
+        
+        # 1. Obtenim el directori on es troba realment aquest script
+        dir_path = os.path.dirname(os.path.abspath(__file__))
+        
+        # 2. Construïm la ruta absoluta cap al fitxer del diccionari
+        dict_path = os.path.join(dir_path, 'dict.txt.big')
+        
+        # 3. Indiquem a jieba la ruta absoluta correcta
+        jieba.set_dictionary(dict_path)
 
     def split_numbers(self,segment):
         xifres = re.findall(self.re_num,segment)
